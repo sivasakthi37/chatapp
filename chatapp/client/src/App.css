@@ -1,0 +1,40 @@
+
+body {
+
+  background-image: url("./assets/5rVml.png");
+
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.TextField{
+margin-right : 10000px
+}
+
+.form{
+  justify-content:center;
+  align-content: center;
+}
+.center{
+  text-align: center;
+
+}
+.rightalign{
+align-self: center
+}
+.button {
+  margin: 100px;
+}
+form {
+  margin-top: 7%;
+}
+.margin{
+  margin-top: 1%
+
+}
+
