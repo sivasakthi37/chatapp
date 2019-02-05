@@ -12,78 +12,83 @@ class Loginpage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "",
-            password: "",
+            username: '',
+            password: '',
             open: false,
         }
     }
-handleReg =event=> {
-event.preventDefault();
-window.location.href="/register";
+    handleReg = event => {
+        event.preventDefault();
+        window.location.href = "/register";
 
-}
+    }
     handleSubmit = event => {
         event.preventDefault();
-        console.log(this.state.userName);
-        console.log(this.state.userName === '');
+        console.log(this.state.username);
+        console.log(this.state.username === '');
         console.log("hai how are u");
 
-        // if (this.state.userName === "") {
+        if (this.state.username === '') {
             this.setState({ open: true });
-       // }
-        // toast("userName cannot be empty", {
-        //     position: toast.POSITION.BOTTOM_CENTER
-        // });
+        }
+        else if (this.state.password === '') {
+            this.setState({ open: true });
+        }
+        else {
+            window.location.href = "/dashBoard";
 
-    };
+        }
+    }
 
+    render() {
+        return (
+            <div>
+                <form>
 
-render() {
-    return (
-        <div>
-            <form>
+                    <div>
 
-                <div>
+                        <center>
+                            < TextField label="username"
+                                onChange={(event, newValue) => this.setState({ username: newValue })}
+                            />
+                            <br></br>
+                            <TextField className="margin" label="password" type= "password"
+                                onChange={(event, newValue) => this.setState({ password: newValue })}
+                            />
+                            <br></br>
 
-                    <center>
-                        < TextField label="username"
-                            onChange={(event, newValue) => this.setState({ username: newValue })}
-                        />
-                        <br></br>
-                        <TextField className="margin" label="password"
-                            onChange={(event, newValue) => this.setState({ password: newValue })}
-                        />
-                        <br></br>
-
-                        {/* <button type="submit"  id="signinButton" onClick={this.registrationclick}>
+                            {/* <button type="submit"  id="signinButton" onClick={this.registrationclick}>
                    <b>REGISTRATION</b>
                  </button> */}
-                        <Button color="primary" className="button" onClick={this.handleSubmit} > SUBMIT</Button>
-                        <Button color="primary" className="button" onClick={this.handleReg} > REGISTER</Button>
-                    </center>
-                </div>
-            </form>
-            <Snackbar
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                open={this.state.open}
-                autoHideDuration={60}
-
-                ContentProps={{
-                    'aria-describedby': 'message-id',
-                }}
-                message={<span id="message-id">
-                    Please fill the fields</span>}
-                    
+                 <br></br>
+                 
+                            <Button variant="contained" color="primary" className="button" onClick={this.handleSubmit} > SUBMIT</Button>
+                            <Button variant="contained" color="primary" className="button" onClick={this.handleReg} > REGISTER</Button>
+                        </center>
+                    </div>
+                </form>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                    }}
+                    open={this.state.open}
+                    autoHideDuration={6000}
 
 
-            />
-        </div>
+                    ContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id">
+                        PLZ ENTER PROPER INPUT</span>}
 
-    );
-}
+
+
+                />
+            </div>
+
+        );
+    }
 }
 export default Loginpage;
 

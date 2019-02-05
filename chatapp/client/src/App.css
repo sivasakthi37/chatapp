@@ -1,40 +1,92 @@
-
 body {
-
-  background-image: url("./assets/5rVml.png");
-
+    background-image: url("./assets/5rVml.png");
 }
+
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.TextField{
-margin-right : 10000px
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-.form{
-  justify-content:center;
-  align-content: center;
+.TextField {
+    margin-right: 10000px
 }
-.center{
-  text-align: center;
 
+.form {
+    justify-content: center;
+    align-content: center;
 }
-.rightalign{
-align-self: center
+
+.center {
+    text-align: center;
 }
+
+.rightalign {
+    align-self: center
+}
+
 .button {
-  margin: 100px;
+    margin: 100px;
 }
+
 form {
-  margin-top: 7%;
-}
-.margin{
-  margin-top: 1%
-
+    margin-top: 7%;
 }
 
+.margin {
+    margin-top: 1%;
+}
+
+.grow {
+    align-self: flex-end;
+}
+
+dir {
+    margin-top: 10%;
+}
+
+.container {
+    /* margin-block-end: 100%; */
+    margin-top: 6%;
+    margin-left: 60%;
+    width: 100%;
+    border:2px solid black;
+    width:500px;
+    height: 400px;
+}
+.onlineflex{
+  display :flex;
+  margin-top:10%;
+  margin-left:0%;
+  margin-right: 60%;
+  width: 100%;
+  border:2px solid black;
+  width:400px;
+  height: 400px;
+
+}
+#align {
+    text-align: left;
+    border: 2ch;
+}
+
+.containerButton {
+    margin-top: 0%;
+    margin-left: 60%;
+    margin-bottom: 2%;
+    width: 500px;
+    display: flex;
+}
+.containerButton div {
+    vertical-align: middle;
+    margin-top: 22px;
+    height: 40px;
+}
+#sendMessage {
+    margin-top: 22px;
+    height: 40px;
+    vertical-align: middle;
+}

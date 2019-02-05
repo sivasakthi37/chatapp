@@ -12,7 +12,6 @@ import Loginpage from '../components/loginPage';
 //import { Button } from '@material-ui/core';
 
 
-
 class Login extends Component {
 
     render() {

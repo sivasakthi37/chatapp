@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./pages/Login";
 
  import './App.css';
+ import DashBoard from './pages/dashBoard';
 import Reg from './pages/register';
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
           <div >
             <Route path="/Login" component={Login} />
             <Route path="/register" component={Reg} />
+            <Route path="/dashBoard" component={DashBoard} />
              {/* <h2 class="center" >Hai welcome to Home page...</h2>  */}
            
 
