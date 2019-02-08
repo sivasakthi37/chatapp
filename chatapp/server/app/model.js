@@ -1,12 +1,16 @@
 const mongoose=require('mongoose');
 
-const NoteSchema=mongoose.Schema({
+const RegisterSchema=mongoose.Schema({
 
-title:String,
-content:String,
+firstname:String,
+lastname:String,
+email:String,
+password:String,
+// title:String,
+// content:String,
 },
 {
 timestamps:true
 
 });
-module.exports = mongoose.model('Note',NoteSchema);
+module.exports = mongoose.model('Register',RegisterSchema);

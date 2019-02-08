@@ -51,9 +51,7 @@ class RegisterPage extends Component {
 
             window.location.href = "/Login";
           
-
         }
-
     }
     render() {
         return (
@@ -95,15 +93,7 @@ class RegisterPage extends Component {
                     message={<span id="message-id">
                         PLZ ENTER PROPER INPUT</span>}
 
-
-
                 />
-
-
-
-
-
-
             </div>
         )
 

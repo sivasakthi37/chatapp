@@ -16,9 +16,7 @@ class App extends Component {
             <Route path="/Login" component={Login} />
             <Route path="/register" component={Reg} />
             <Route path="/dashBoard" component={DashBoard} />
-             {/* <h2 class="center" >Hai welcome to Home page...</h2>  */}
-           
-
+             {/* <h2 class="center" >Hai welcome to Home page...</h2>  */}           
           </div>
         </Router>
 
