@@ -3,9 +3,10 @@ module .exports=(app)=>{
     const notes=require('../controllers/note.controller');
 
 
-    app.post('/Register',notes.create);
+   // app.post('/Register',notes.create);
+   app.post('/Register',notes.registration);
 
 
-   // app.get('Login',notes.findOne);
+    app.post('/Login',notes.login);
 
 }

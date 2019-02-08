@@ -26,7 +26,7 @@ class Login extends Component {
                 <br></br>
                 
                     <div>
-                        <Loginpage />
+                        <Loginpage props={this.props} />
                     </div>
             
                 {/* <div>

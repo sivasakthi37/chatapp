@@ -19,7 +19,7 @@ class Loginpage extends Component {
     }
     handleReg = event => {
         event.preventDefault();
-        window.location.href = "/register";
+        this.props.props.history.push( "/register");
 
     }
     handleSubmit = event => {
@@ -35,7 +35,7 @@ class Loginpage extends Component {
             this.setState({ open: true });
         }
         else {
-            window.location.href = "/dashBoard";
+         //  this.props.history.push("/dashBoard");
 
         }
     }
