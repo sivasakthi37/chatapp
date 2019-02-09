@@ -3,32 +3,47 @@ import '../App.css';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+//import { withStyles } from '@material-ui/core/styles';
+import { userRegister } from '../services/userServices'
+
 class RegisterPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstname:'',
+            firstname: '',
             lastname: '',
-            mailid: '',
-            password:'',
+            email: '',
+            password: '',
             open: false,
             up: false,
         };
-        this.baseState=this.state;
+        this.baseState = this.state;
     }
-    
+
+    handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        this.setState({ open: false });
+    };
     handleReset = () => {
 
         this.setState(this.baseState);
 
     }
+    handleChange = name => event => {
+        this.setState({ [name]: event.target.value });
+    };
     handleRegister = event => {
         event.preventDefault();
 
-         console.log("this.state.firstname "  );
-         console.log(this.state.firstname );
+        console.log("this.state.firstname ");
+        console.log(this.state.firstname);
 
-         console.log(this.state.firstname==='' );
+        console.log(this.state.firstname === '');
         if (this.state.firstname === '') {
             this.setState({ open: true });
         }
@@ -37,6 +52,7 @@ class RegisterPage extends Component {
         // console.log(this.state.lastname==='');
 
         else if (this.state.lastname === '') {
+
             this.setState({ open: true });
         }
         // console.log("this.state.mailid");
@@ -54,36 +70,52 @@ class RegisterPage extends Component {
             this.setState({ open: true });
         }
         else {
-
-            window.location.href = "/Login";
-
+            var data = {
+                firstname: this.state.firstname,
+                lastname: this.state.lastname,
+                email: this.state.email,
+                password: this.state.password
+            }
+            userRegister(data);
         }
     }
     render() {
         return (
             <div>
-                <center>
-                    <form>  < TextField label="Firstname"
-                        onChange={(event, newValue) => this.setState({ firstname: newValue })}
-                    />  </form>
-                    <br></br>
-                    < TextField label="Lastname"
-                        onChange={(event, newValue) => this.setState({ lastname: newValue })}
-                    />
-                    <br></br>
-                    < TextField label="Email"
-                        onChange={(event, newValue) => this.setState({ mailid: newValue })}
-                    />
-                    <br></br>
-                    < TextField label="Password" type="password"
-                        onChange={(event, newValue) => this.setState({ password: newValue })}
-                    /><br></br>
 
-                    <br></br>
-                    <Button variant="contained" color="primary" className="button" onClick={this.handleReset} >Reset</Button>
-                    <Button variant="contained" color="primary" className="button" onClick={this.handleRegister} > REGISTER</Button>
+                <form align="center">
+                    <div>
+                        < TextField label="Firstname"
+                            onChange={this.handleChange('firstname')}
+                        />
+                    </div>
+                    <div>
+                        < TextField label="Lastname"
+                            onChange={this.handleChange('lastname')}
+                        />
+                    </div>
+                    <div>
+                        < TextField label="Email"
+                            onChange={this.handleChange('email')}
+                        />
+                    </div>
+                    <div>
+                        < TextField label="Password" type="password"
+                            onChange={this.handleChange('password')}
+                        />
+                    </div>
+                    <div id="buttonalign"  >
 
-                </center>
+                        <Button variant="contained" color="primary" className="button" type="reset" >Reset</Button>
+                    
+                    
+                        <Button variant="contained" color="primary" className="button" onClick={this.handleRegister} > REGISTER</Button>
+                    </div>
+                    
+                </form>
+
+
+
                 <Snackbar
                     anchorOrigin={{
                         vertical: 'top',
@@ -98,6 +130,20 @@ class RegisterPage extends Component {
                     }}
                     message={<span id="message-id">
                         PLZ ENTER PROPER INPUT</span>}
+                    action={[
+                        <Button key="undo" color="secondary" size="small" onClick={this.handleClose}>
+                            UNDO
+    </Button>,
+                        <IconButton
+                            key="close"
+                            aria-label="Close"
+                            color="inherit"
+                            //  className={classes.close}
+                            onClick={this.handleClose}
+                        >
+                            <CloseIcon />
+                        </IconButton>,
+                    ]}
 
                 />
             </div>
@@ -106,4 +152,5 @@ class RegisterPage extends Component {
     }
 
 }
+export { RegisterPage };
 export default RegisterPage;

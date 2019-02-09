@@ -1,5 +1,5 @@
 body {
-    background-image: url("./assets/5rVml.png");
+    background-image: url("./assets/pic.png");
 }
 
 @keyframes App-logo-spin {
@@ -50,24 +50,25 @@ dir {
 
 .container {
     /* margin-block-end: 100%; */
-    margin-top: 6%;
+    margin-top: 12%;
     margin-left: 60%;
     width: 100%;
-    border:2px solid black;
-    width:500px;
+    border: 2px solid black;
+    width: 500px;
     height: 400px;
 }
-.onlineflex{
-  display :flex;
-  margin-top:10%;
-  margin-left:0%;
-  margin-right: 60%;
-  width: 100%;
-  border:2px solid black;
-  width:400px;
-  height: 400px;
 
+.onlineflex {
+    display: flex;
+    margin-top: 10%;
+    margin-left: 0%;
+    margin-right: 60%;
+    width: 100%;
+    border: 2px solid black;
+    width: 400px;
+    height: 400px;
 }
+
 #align {
     text-align: left;
     border: 2ch;
@@ -80,13 +81,31 @@ dir {
     width: 500px;
     display: flex;
 }
+
 .containerButton div {
     vertical-align: middle;
     margin-top: 22px;
     height: 40px;
 }
+
 #sendMessage {
     margin-top: 22px;
     height: 40px;
     vertical-align: middle;
+}
+
+#buttonalign {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 550px;
+    margin-top: 11px;
+    margin-right: 515px;
+}
+#forgetbutton{
+margin-top: 6px;
+    margin-left: 24px;
+}
+#forgetsubmit{
+    margin-top:24px;
 }

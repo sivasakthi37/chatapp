@@ -16,8 +16,8 @@ res.json("Your DATABASE is Connected sucessfully");
 
 });
 
-app.listen(3000,()=>{
-console.log("see the local host port number 3000");
+app.listen(4000,()=>{
+console.log("see the local host port number 4000");
 })
 
 mongoose.connect(dbConfig.url, {

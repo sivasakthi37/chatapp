@@ -2,24 +2,44 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import '../App.css';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 // import { ToastContainer, toast } from "react-toastify";
 // import 'react-toastify/dist/ReactToastify'
 import Snackbar from '@material-ui/core/Snackbar';
 //import reg from './register';
-
-class Loginpage extends Component {
+import { userLogin } from '../services/userServices'
+class
+    Loginpage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
+            email: '',
             password: '',
             open: false,
         }
     }
+    
+    handleforgetpassword=event=>{
+        event.preventDefault();
+        this.props.props.history.push("/forgetpassword");
+
+    }
+    handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        this.setState({ open: false });
+    };
+    handleChange = name => event => {
+        this.setState({ [name]: event.target.value });
+    };
+
     handleReg = event => {
         event.preventDefault();
-        this.props.props.history.push( "/register");
+        this.props.props.history.push("/register");
 
     }
     handleSubmit = event => {
@@ -28,14 +48,23 @@ class Loginpage extends Component {
         console.log(this.state.username === '');
         console.log("hai how are u");
 
-        if (this.state.username === '') {
+        if (this.state.email === '') {
+
             this.setState({ open: true });
         }
-        else if (this.state.password === '') {
+         else if (this.state.password === '') {
             this.setState({ open: true });
         }
+    
         else {
-         //  this.props.history.push("/dashBoard");
+            //  window.location.href='/loginPage';
+            var data = {
+                email: this.state.email,
+                password: this.state.password,
+            }
+            userLogin(data);
+            //window.location.href='/dashboard';
+            //  this.props.history.push("/dashBoard");
 
         }
     }
@@ -43,30 +72,32 @@ class Loginpage extends Component {
     render() {
         return (
             <div>
-                <form>
+                    <div >
+                        <form align="center">
+                            <div>
+                                < TextField label="Email"
+                                     onChange={this.handleChange('email')}
+                                />
+                            </div>
+                            <div>
+                                <TextField className="margin" label="password" type="password"
+                                    onChange={this.handleChange('password')}
+                                />
+                            </div>
 
-                    <div>
 
-                        <center>
-                            < TextField label="username"
-                                onChange={(event, newValue) => this.setState({ username: newValue })}
-                            />
-                            <br></br>
-                            <TextField className="margin" label="password" type= "password"
-                                onChange={(event, newValue) => this.setState({ password: newValue })}
-                            />
-                            <br></br>
 
-                            {/* <button type="submit"  id="signinButton" onClick={this.registrationclick}>
-                   <b>REGISTRATION</b>
-                 </button> */}
-                 <br></br>
-                 
-                            <Button variant="contained" color="primary" className="button" onClick={this.handleSubmit} > SUBMIT</Button>
-                            <Button variant="contained" color="primary" className="button" onClick={this.handleReg} > REGISTER</Button>
-                        </center>
+                            <div id="buttonalign" >
+                                <Button variant="contained" color="primary" className="button" onClick={this.handleSubmit} > SUBMIT</Button>
+                                <Button variant="contained" color="primary" className="button" onClick={this.handleReg} > REGISTER</Button>
+                            </div>
+                            <div id="forgetbutton" >
+                                <Button variant="contained" color="primary" className="button" onClick={this.handleforgetpassword} >forgetpassword</Button>
+                            </div>
+                        </form>
+
                     </div>
-                </form>
+                
                 <Snackbar
                     anchorOrigin={{
                         vertical: 'top',
@@ -81,7 +112,20 @@ class Loginpage extends Component {
                     }}
                     message={<span id="message-id">
                         PLZ ENTER PROPER INPUT</span>}
-
+                    action={[
+                        <Button key="undo" color="secondary" size="small" onClick={this.handleClose}>
+                            UNDO
+    </Button>,
+                        <IconButton
+                            key="close"
+                            aria-label="Close"
+                            color="inherit"
+                            //  className={classes.close}
+                            onClick={this.handleClose}
+                        >
+                            <CloseIcon />
+                        </IconButton>,
+                    ]}
 
 
                 />
@@ -90,6 +134,7 @@ class Loginpage extends Component {
         );
     }
 }
+export { Loginpage };
 export default Loginpage;
 
 

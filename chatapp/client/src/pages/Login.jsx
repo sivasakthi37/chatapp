@@ -18,34 +18,15 @@ class Login extends Component {
         return (
             <div>
 
-
                 <div>
                      <AppBar position="fixed" > <h1 className="center" >.......LOGIN PAGES.......</h1> </AppBar> 
 
                 </div>
-                <br></br>
+                
                 
                     <div>
                         <Loginpage props={this.props} />
                     </div>
-            
-                {/* <div>
-                        <br></br>
-                        <br></br>
-                        <br></br>
-                        <center>
-                            < TextField label="username"
-                                onChange={(event, newValue) => this.setState({ username: newValue })}
-                            /><br></br>
-                            <br></br>
-                            < TextField label="password"
-                                onChange={(event, newValue) => this.setState({ password: newValue })}
-                            />
-                            <br></br>
-                            <br></br>
-                            <button> SUBMIT </button>
-                            </center>
-                    </div> */}
 
             </div>
         );

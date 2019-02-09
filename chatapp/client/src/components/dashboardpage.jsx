@@ -10,10 +10,10 @@ class DashPage extends Component {
 
         return (
             <div>
-                <div className="onlineflex">
+                {/* <div className="onlineflex">
 
-                    hahi hellow how are ua
-                </div>
+                    online users
+                </div> */}
 
                 <div className="container"><h1>Online</h1></div>
 

@@ -24,8 +24,7 @@ render(){
 
 <form>
 
-<DashPage/>
-
+<DashPage  props={this.props} />
 
 </form>
 

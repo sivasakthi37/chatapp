@@ -9,13 +9,15 @@ class reg extends Component {
         return (
             <div>
 
+
                 <div>
                     <AppBar position="fixed" > <h1 className="center" >.......REGISTER PAGES.......</h1> </AppBar>
 
                 </div>
                
                 <div>
-                    <RegisterPage />
+                    <RegisterPage props={this.props} />
+                   
                     </div>
                     
 
