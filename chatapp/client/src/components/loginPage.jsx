@@ -20,8 +20,8 @@ class
             open: false,
         }
     }
-    
-    handleforgetpassword=event=>{
+
+    handleforgetpassword = event => {
         event.preventDefault();
         this.props.props.history.push("/forgetpassword");
 
@@ -47,15 +47,15 @@ class
         console.log(this.state.username);
         console.log(this.state.username === '');
         console.log("hai how are u");
-
-        if (this.state.email === '') {
+        var Emailverfy = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(this.state.email);
+        if (this.state.email === '' || !Emailverfy) {
 
             this.setState({ open: true });
         }
-         else if (this.state.password === '') {
+        else if (this.state.password === '' || this.state.password.length < 6) {
             this.setState({ open: true });
         }
-    
+
         else {
             //  window.location.href='/loginPage';
             var data = {
@@ -72,32 +72,32 @@ class
     render() {
         return (
             <div>
-                    <div >
-                        <form align="center">
-                            <div>
-                                < TextField label="Email"
-                                     onChange={this.handleChange('email')}
-                                />
-                            </div>
-                            <div>
-                                <TextField className="margin" label="password" type="password"
-                                    onChange={this.handleChange('password')}
-                                />
-                            </div>
+                <div >
+                    <form align="center">
+                        <div>
+                            < TextField label="Email"
+                                onChange={this.handleChange('email')}
+                            />
+                        </div>
+                        <div>
+                            <TextField className="margin" label="password" type="password"
+                                onChange={this.handleChange('password')}
+                            />
+                        </div>
 
 
 
-                            <div id="buttonalign" >
-                                <Button variant="contained" color="primary" className="button" onClick={this.handleSubmit} > SUBMIT</Button>
-                                <Button variant="contained" color="primary" className="button" onClick={this.handleReg} > REGISTER</Button>
-                            </div>
-                            <div id="forgetbutton" >
-                                <Button variant="contained" color="primary" className="button" onClick={this.handleforgetpassword} >forgetpassword</Button>
-                            </div>
-                        </form>
+                        <div id="buttonalign" >
+                            <Button variant="contained" color="primary" className="button" onClick={this.handleSubmit} > SUBMIT</Button>
+                            <Button variant="contained" color="primary" className="button" onClick={this.handleReg} > REGISTER</Button>
+                        </div>
+                        <div id="forgetbutton" >
+                            <Button variant="contained" color="primary" className="button" onClick={this.handleforgetpassword} >forgetpassword</Button>
+                        </div>
+                    </form>
 
-                    </div>
-                
+                </div>
+
                 <Snackbar
                     anchorOrigin={{
                         vertical: 'top',

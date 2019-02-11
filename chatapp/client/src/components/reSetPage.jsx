@@ -1,40 +1,24 @@
 import React, { Component } from 'react';
-//import { Button } from '@material-ui/core';
+import Snackbar from '@material-ui/core/Snackbar';
 import TextField from '@material-ui/core/TextField';
-import '../App.css';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import Snackbar from '@material-ui/core/Snackbar';
-import { verifyEmail } from '../services/userServices'
-class ForgetPassword extends Component {
+import {passwordupdate} from '../services/userServices';
+
+
+class Resetpage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
+            password:'',
+            conformpassword:'',
             open: false,
         }
     }
-    handlesubmit = event => {
-        event.preventDefault();
-        console.log("this.state.email ");
-        console.log(this.state.email);
-        var Emailverfy = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(this.state.email);
-
-        if (this.state.email === '' || !Emailverfy) {
-
-            this.setState({ open: true });
-        }
-        else {
-            var data = {
-                email: this.state.email,
-            }
-            verifyEmail(data);  
-
-        }
-
-
-    }
+    handleChange = name => event => {
+        this.setState({ [name]: event.target.value });
+    };
     handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -42,21 +26,47 @@ class ForgetPassword extends Component {
 
         this.setState({ open: false });
     };
-    handleChange = name => event => {
+    handleSubmit=event=>{
+        event.preventDefault();
+        if (this.state.password === ''|| this.state.password.length < 6) {
+            this.setState({ open: true });
+        }
+        else if (this.state.conformpassword === ''|| this.state.conformpassword.length < 6) {
+         
+            this.setState({ open: true });
+        }
+        else if(this.state.password!==this.state.conformpassword){
+            this.setState({ open: true });
+        }
 
-        this.setState({ [name]: event.target.value });
+        else {
+             var data = {
+                 password: this.state.password,
+                
+             }
+           passwordupdate(data);
+        }
+
+
     }
+
+
     render() {
         return (
             <div>
                 <form align="center">
-                    <div >
-                        < TextField label="Email"
-                            onChange={this.handleChange('email')}
+                    <div>
+                        < TextField label="New Password" type="password"
+                            onChange={this.handleChange('password')}
                         />
                     </div>
                     <div>
-                        <Button id="forgetsubmit" variant="contained" color="primary" onClick={this.handlesubmit} >submit</Button>
+                        < TextField label="Conform password" type="password"
+                            onChange={this.handleChange('conformpassword')}
+                        />
+                    </div>
+                    <div id="buttonalign"  >
+                        <Button variant="contained" color="primary" className="button" onClick={this.handleSubmit} >Submit</Button>
                     </div>
                 </form>
                 <Snackbar
@@ -66,13 +76,13 @@ class ForgetPassword extends Component {
                     }}
                     open={this.state.open}
                     autoHideDuration={6000}
-
+                    onClose={this.handleClose}
 
                     ContentProps={{
                         'aria-describedby': 'message-id',
                     }}
                     message={<span id="message-id">
-                        Plz Enter valid Email</span>}
+                        PLZ ENTER PROPER INPUT</span>}
                     action={[
                         <Button key="undo" color="secondary" size="small" onClick={this.handleClose}>
                             UNDO
@@ -88,14 +98,17 @@ class ForgetPassword extends Component {
                         </IconButton>,
                     ]}
 
-
                 />
 
 
             </div>
 
+
         )
 
     }
+
+
+
 }
-export default ForgetPassword;
+export default Resetpage;

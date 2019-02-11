@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-let saltRounds=10;
+let saltRounds = 10;
 //const RegisterSchema=mongoose.Schema({
 const UserSchema = mongoose.Schema({
     firstname: {
@@ -30,15 +30,15 @@ function hash(password) {
 }
 userModel.prototype.registration = (body, callback) => {
 
-    user.find({"email": body.email}, (err, data) => {
-        console.log("data.length "+ data);
+    user.find({ "email": body.email }, (err, data) => {
+        console.log("data.length " + data);
         if (err) {
             console.log("Error in registration");
             callback(err);
-        } 
+        }
         else if (data.length > 0) {
-            console.log("data.length "+ data);
-            
+            console.log("data.length " + data);
+
             console.log("Email already exists ");
             callback("User already Present");
 
@@ -66,14 +66,12 @@ userModel.prototype.registration = (body, callback) => {
     });
 }
 userModel.prototype.login = (body, callback) => {
-    user.findOne({
-        "email": body.email
-    }, (err, data) => {
+    user.findOne({ "email": body.email }, (err, data) => {
         // console.log(data);
         if (err) {
             callback(err);
         } else if (data != null) {
-             //console.log(data);
+            //console.log(data);
             bcrypt.compare(body.password, data.password).then(function (res) {
                 if (res) {
                     console.log("login succesfully");
@@ -86,6 +84,22 @@ userModel.prototype.login = (body, callback) => {
         } else {
             console.log("Invalid user");
             callback("invalid user");
+        }
+    })
+
+}
+userModel.prototype.checkvalid = (body, callback) => {
+
+    user.findOne({ "email": body.email }, (err, data) => {
+
+        console.log("data:" +data);
+        if (err) {
+            console.log("error");
+
+            callback(err);
+        }
+        else {
+            callback(null,data);
         }
     })
 

@@ -30,3 +30,16 @@ exports.login = (data, callback) => {
 
 
 }
+exports.checkuser = (data, callback) => {
+    userModel.checkvalid(data, (err, result) => {
+
+        if (err) {
+            console.log("service err");
+            callback(err);
+        }
+        else {
+            callback(null, result);
+        }
+
+    })
+}

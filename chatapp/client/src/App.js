@@ -4,6 +4,7 @@ import Forgetpassword from './pages/forgetpassword'
 import Login from "./pages/Login";
 import './App.css';
  import DashBoard from './pages/dashBoard';
+ import Reset from '../src/pages/reSet'
 import Reg from './pages/register';
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
             <Route path="/register" component={Reg} />
             <Route path="/dashBoard" component={DashBoard} />
             <Route path="/forgetpassword" component={Forgetpassword} />
+            <Route path="/reset" component={Reset} />
              {/* <h2 class="center" >Hai welcome to Home page...</h2>  */}           
           </div>
         </Router>
