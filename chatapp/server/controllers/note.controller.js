@@ -1,6 +1,6 @@
 //const Register = require('../app/model');
-const gentoken=require('../middleware/tokens')
-const sendmail=require('../middleware/sendmail')
+const gentoken = require('../middleware/tokens')
+const sendmail = require('../middleware/sendmail')
 const userService = require('../services/user.Services');
 exports.registration = (req, res) => {
     var responseResult = {};
@@ -16,13 +16,13 @@ exports.registration = (req, res) => {
             res.status(200).send(responseResult)
         }
     }
-   )
+    )
 }
 exports.login = (req, res) => {
     try {
         var responseResult = {};
         userService.login(req.body, (err, result) => {
-            console.log(req.body.email);
+          //console.log(req.body.email);
 
             if (err) {
                 responseResult.success = false;
@@ -51,25 +51,41 @@ exports.finduser = (req, res) => {
             respondresult.result = err;
             res.status(500).send(respondresult);
         }
-        else {   
-             console.log("result is true : "+result);
-             respondresult.success = true;
-             respondresult.result = result;
+        else {
+          //  console.log("result is true : " + result);
+            respondresult.success = true;
+            respondresult.result = result;
 
-             const payload = {
+            const payload = {
                 user_id: respondresult.result._id
             }
-            console.log(payload);
+          //  console.log(payload);
             const obj = gentoken.GenerateToken(payload);
             const url = `http://localhost:3000/reset/${obj.token}`;
-           
+
             sendmail.sendEMailFunction(url);
             //Send email using this token generated
-           res.status(200).send(url);
+            res.status(200).send(url);
         }
     })
+}
+exports.setPassword = (req, res) => {
+    var Responce = {};
+//console.log("controller  ",req.decoded);
+//console.log();
+
+    userService.setpass(req, (err, result) => {
 
 
-
-
+        if (err) {
+            Responce .success = false;
+            Responce .result = err;
+            res.status(500).send( Responce );
+        }
+        else {
+            Responce .success = true;
+            Responce .result = result;
+            res.status(200).send( Responce );
+        }
+    })
 }

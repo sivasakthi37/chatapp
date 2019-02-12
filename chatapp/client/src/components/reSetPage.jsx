@@ -4,15 +4,15 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import {passwordupdate} from '../services/userServices';
+import { passwordupdate } from '../services/userServices';
 
 
 class Resetpage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            password:'',
-            conformpassword:'',
+            password: '',
+            conformpassword: '',
             open: false,
         }
     }
@@ -26,31 +26,33 @@ class Resetpage extends Component {
 
         this.setState({ open: false });
     };
-    handleSubmit=event=>{
+    handleSubmit = event => {
         event.preventDefault();
-        if (this.state.password === ''|| this.state.password.length < 6) {
+        if (this.state.password === '' || this.state.password.length < 6) {
             this.setState({ open: true });
         }
-        else if (this.state.conformpassword === ''|| this.state.conformpassword.length < 6) {
-         
+        else if (this.state.conformpassword === '' || this.state.conformpassword.length < 6) {
+
             this.setState({ open: true });
         }
-        else if(this.state.password!==this.state.conformpassword){
+        else if (this.state.password !== this.state.conformpassword) {
             this.setState({ open: true });
         }
 
         else {
-             var data = {
-                 password: this.state.password,
-                
-             }
-           passwordupdate(data);
+            var data = {
+                password: this.state.password,
+
+            }
+            console.log(data.password);
+
+            let currenturl = window.location.pathname;
+            let token = currenturl.substr(7);
+            console.log("Current url", currenturl);
+            console.log("Token is:", token);
+             passwordupdate(data, token);
         }
-
-
     }
-
-
     render() {
         return (
             <div>

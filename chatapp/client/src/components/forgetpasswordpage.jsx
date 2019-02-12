@@ -26,6 +26,8 @@ class ForgetPassword extends Component {
             this.setState({ open: true });
         }
         else {
+
+            
             var data = {
                 email: this.state.email,
             }

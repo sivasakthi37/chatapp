@@ -9,7 +9,6 @@ function userRegister(data) {
 
             //  this.props.props.history.push("/Login");
 
-
             window.location.href = '/Login';
             // alert('Registered success..')
 
@@ -42,9 +41,6 @@ function verifyEmail(data) {
     axios.post('/forgetpassword', data)
         .then(function (response) {
 
-            const token1 = response.data;
-            const token2 = token1.substring(34)
-            localStorage.setItem('verifyUserToken', token2);
             alert(' plz check your email..')
         })
         .catch(function (err) {
@@ -52,10 +48,14 @@ function verifyEmail(data) {
             alert('User Not Found..');
         });
 }
-function passwordupdate(data) {
-    axios.post('/', data)
-        .then(function (res) {
 
+function passwordupdate(data, token) {
+
+    console.log("data from front end ", data.password);
+
+    axios.post(`/reset/${token}`, { 'data': data.password },{headers:{ 'token': token }})
+        .then(function (response) {
+            alert('update sucessfully');
             window.location.href = '/Login';
         })
         .catch(function (err) {

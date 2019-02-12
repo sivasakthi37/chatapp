@@ -50,7 +50,8 @@ dir {
 
 .container {
     /* margin-block-end: 100%; */
-    margin-top: 12%;
+    display: 1;
+    margin-top: -32%;
     margin-left: 60%;
     width: 100%;
     border: 2px solid black;
@@ -108,4 +109,9 @@ margin-top: 6px;
 }
 #forgetsubmit{
     margin-top:24px;
+}
+#htag{
+
+margin-top:-1%;
+
 }

@@ -79,7 +79,8 @@ class RegisterPage extends Component {
                 email: this.state.email,
                 password: this.state.password
             }
-            userRegister(data);
+           userRegister(data);
+           
         }
     }
     render() {

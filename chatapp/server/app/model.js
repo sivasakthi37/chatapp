@@ -72,6 +72,7 @@ userModel.prototype.login = (body, callback) => {
             callback(err);
         } else if (data != null) {
             //console.log(data);
+                    
             bcrypt.compare(body.password, data.password).then(function (res) {
                 if (res) {
                     console.log("login succesfully");
@@ -92,7 +93,7 @@ userModel.prototype.checkvalid = (body, callback) => {
 
     user.findOne({ "email": body.email }, (err, data) => {
 
-        console.log("data:" +data);
+       // console.log("data:",data);
         if (err) {
             console.log("error");
 
@@ -102,6 +103,26 @@ userModel.prototype.checkvalid = (body, callback) => {
             callback(null,data);
         }
     })
+
+}
+
+userModel.prototype.updatepassword=(res,callback)=>{
+
+    console.log("IN MODELS :",res.body.data);
+    console.log("IN MODEL DECODE :",res.decoded);
+    
+
+ var password=hash(res.body.data);
+    user.updateOne({ _id: res.decoded.payload.user_id }, { password:password }, (err, result) => {
+        if (err) {
+            callback(err);
+        }
+        else {
+            callback(null, result);
+        }
+    });
+
+
 
 }
 

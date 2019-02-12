@@ -9,10 +9,9 @@ import DashPage from '../components/dashboardpage';
 class DashBoard extends Component {
 handlelogout = event=>{
     event.preventDefault();
-window.location.href="/Login"
+    this.props.history.push("/Login");
 
 }
-
 
 render(){
     

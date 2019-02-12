@@ -57,8 +57,7 @@ class
         }
 
         else {
-            //  window.location.href='/loginPage';
-            var data = {
+                        var data = {
                 email: this.state.email,
                 password: this.state.password,
             }

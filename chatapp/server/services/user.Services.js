@@ -26,9 +26,6 @@ exports.login = (data, callback) => {
 
         }
     })
-
-
-
 }
 exports.checkuser = (data, callback) => {
     userModel.checkvalid(data, (err, result) => {
@@ -39,6 +36,24 @@ exports.checkuser = (data, callback) => {
         }
         else {
             callback(null, result);
+        }
+
+    })
+}
+exports.setpass = (data, callback) => {
+    //console.log("services ",data.body);
+    
+    userModel.updatepassword(data, (err, result) => {
+
+        if (err) {
+
+            console.log("service error");
+            callback(err);
+
+        }
+        else{
+
+            callback(null,result);
         }
 
     })

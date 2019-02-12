@@ -22,7 +22,7 @@ exports.sendEMailFunction = (url,) => {
             console.log("error on sending mail--", err)
         }
         else
-            console.log('result of sending mail-- ',info);
+            console.log('result of sending mail-- ');
     });
     
 }
