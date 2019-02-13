@@ -57,11 +57,20 @@ class
         }
 
         else {
-                        var data = {
+            var data = {
                 email: this.state.email,
                 password: this.state.password,
             }
-            userLogin(data);
+            userLogin(data)
+                .then((res) => {
+                    console.log("responce true");
+                    this.props.props.history.push("/dashBoard");
+
+                }).catch((err) => {
+                    console.log("err", err);
+
+                    alert("Login unsuccessful!!");
+                })
             //window.location.href='/dashboard';
             //  this.props.history.push("/dashBoard");
 

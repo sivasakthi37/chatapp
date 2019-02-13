@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+//import name from '../services/chatServices';
+ import openSocket from 'socket.io-client';
 
 import '../App.css';
 //import { AppBar } from "@material-ui/core";
@@ -8,21 +10,23 @@ import '../App.css';
 class DashPage extends Component {
 
     constructor(props) {
+        const  socket = openSocket('http://localhost:4000');
         super(props);
         this.state = {
             message: '',
 
         }
-
-
+        
+        socket.emit('message', "test data");
     }
-
 
 
     handleClick = name => event => {
 
-        this.setState({ name: event.taget.value })
+        this.setState({ [name]: event.target.value });
+        
     }
+
     render() {
         return (
             <div>
@@ -38,7 +42,7 @@ class DashPage extends Component {
                         //  style={{ marginLeft: "20px", width: "400px" }}
                         onChange={this.handleClick('message')}
                     />
-                    <Button id="sendMessage" variant="contained" color="primary" className="button" onClick={this.handleReset} >Send</Button>
+                    <Button id="sendMessage" variant="contained" color="primary" className="button" onClick={this.handlesend} >Send</Button>
                 </div>
             </div>
         )

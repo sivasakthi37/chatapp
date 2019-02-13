@@ -50,7 +50,13 @@ class Resetpage extends Component {
             let token = currenturl.substr(7);
             console.log("Current url", currenturl);
             console.log("Token is:", token);
-             passwordupdate(data, token);
+            passwordupdate(data, token)
+                .then((res) => {
+                    console.log("reset page getting true ");
+                    this.props.props.history.push("/Login")
+
+
+                })
         }
     }
     render() {

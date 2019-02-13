@@ -11,7 +11,7 @@ import { userRegister } from '../services/userServices'
 class RegisterPage extends Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
             firstname: '',
             lastname: '',
@@ -20,8 +20,28 @@ class RegisterPage extends Component {
             open: false,
             up: false,
         };
-        
+
     }
+    //  componentDidMount() {
+    // userRegister()
+    //     .then((response) => {
+
+    //         //    console.log(response);
+    //         console.log("Responce from the back end",response);
+
+    //         this.props.props.history.push("/Login");
+
+    //         // window.location.href = '/Login';
+    //         // alert('Registered success..')
+
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //         alert("User with email id already exists!!")
+
+    //     })
+    //   }
+
 
     handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -30,7 +50,7 @@ class RegisterPage extends Component {
 
         this.setState({ open: false });
     };
-    
+
     handleChange = name => event => {
         this.setState({ [name]: event.target.value });
     };
@@ -42,9 +62,9 @@ class RegisterPage extends Component {
 
         // console.log(this.state.firstname === '');
         console.log("this.state.mailid");
-         console.log("length",this.state.password.length);
-         var Emailverfy = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(this.state.email);
-      console.log(this.state.email==='')
+        console.log("length", this.state.password.length);
+        var Emailverfy = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(this.state.email);
+        console.log(this.state.email === '')
         if (this.state.firstname === '') {
             this.setState({ open: true });
         }
@@ -60,7 +80,7 @@ class RegisterPage extends Component {
         //  console.log(this.state.mailid);
         //  console.log(this.state.mailid==='');
 
-       else if(this.state.email === ''||!Emailverfy) {
+        else if (this.state.email === '' || !Emailverfy) {
 
 
             this.setState({ open: true });
@@ -69,7 +89,7 @@ class RegisterPage extends Component {
         // console.log(this.state.password);
         // console.log(this.state.password==='');
 
-        else if (this.state.password === ''|| this.state.password.length < 6) {
+        else if (this.state.password === '' || this.state.password.length < 6) {
             this.setState({ open: true });
         }
         else {
@@ -79,8 +99,17 @@ class RegisterPage extends Component {
                 email: this.state.email,
                 password: this.state.password
             }
-           userRegister(data);
-           
+            userRegister(data)
+                .then((responce) => {
+                    console.log("hai how are u");
+                    this.props.props.history.push("/Login");
+                })
+                .catch((err) => {
+                    console.log("errr", err);
+
+                    alert("User with email id already exists!!")
+                })
+
         }
     }
     render() {
@@ -111,11 +140,11 @@ class RegisterPage extends Component {
                     <div id="buttonalign"  >
 
                         <Button variant="contained" color="primary" className="button" type="reset" >Reset</Button>
-                    
-                    
+
+
                         <Button variant="contained" color="primary" className="button" onClick={this.handleRegister} > REGISTER</Button>
                     </div>
-                    
+
                 </form>
 
 

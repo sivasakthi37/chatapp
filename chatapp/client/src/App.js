@@ -3,9 +3,14 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Forgetpassword from './pages/forgetpassword'
 import Login from "./pages/Login";
 import './App.css';
+
  import DashBoard from './pages/dashBoard';
  import Reset from '../src/pages/reSet'
 import Reg from './pages/register';
+// import io from 'socket.io-client';
+// const socket = io.connect('http://localhost:4000');
+
+
 class App extends Component {
   render() {
     return (
