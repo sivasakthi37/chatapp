@@ -8,17 +8,16 @@ app.use(bodyParser.json());
 require('./routes/note.route')(app);
 mongoose.Promise = global.Promise;
 
+const chatmessage = require('./controllers/chat.controller');
 
 /**
  * socket io ...
  */
 // const server = require('http').createServer(app)
-
-
 app.get('/', (req, res) => {
     res.json("Your DATABASE is Connected sucessfully");
 });
-var server=app.listen(4000, () => {
+var server = app.listen(4000, () => {
     console.log("see the local host port number 4000");
 })
 
@@ -36,14 +35,26 @@ const io = require('socket.io').listen(server)
 connections = [];
 io.sockets.on('connection', (client) => {
 
-connections.push(client);
+    connections.push(client);
     console.log("io is connected...");
     client.on('message', (req) => {
 
-        console.log("requiest in server ", req);
+      //  console.log("requiest in server ", req);
+        chatmessage.chatmessage(req, (err, res) => {
+
+            if (err) {
+
+                console.log("error on server while reciving the data");
+
+            }
+            else {
+                client.emit('emit', res);
+
+            }
 
 
-     })
+        })
+    });
     // client.on('subscribeToTimer', (intervel) => {
     //     console.log("client is subscribing to time ", intervel);
 

@@ -20,9 +20,8 @@ const UserSchema = mongoose.Schema({
 },
     {
         timestamps: true
-
     });
-function userModel() { }
+function userModel() {}
 var user = mongoose.model('user', UserSchema);
 function hash(password) {
     var hash = bcrypt.hashSync(password, saltRounds);
@@ -71,10 +70,12 @@ userModel.prototype.login = (body, callback) => {
         if (err) {
             callback(err);
         } else if (data != null) {
-            //console.log(data);
+         
                     
             bcrypt.compare(body.password, data.password).then(function (res) {
                 if (res) {
+                   // console.log("responce in user model ",res);
+                  // console.log("data in model",data);
                     console.log("login succesfully");
                     callback(null, res);
                 } else {
@@ -121,9 +122,6 @@ userModel.prototype.updatepassword=(res,callback)=>{
             callback(null, result);
         }
     });
-
-
-
 }
 
 module.exports = new userModel();

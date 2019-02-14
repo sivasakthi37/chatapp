@@ -44,9 +44,9 @@ class
     }
     handleSubmit = event => {
         event.preventDefault();
-        console.log(this.state.username);
-        console.log(this.state.username === '');
-        console.log("hai how are u");
+       // console.log(this.state.username);
+      //  console.log(this.state.username === '');
+      //  console.log("hai how are u");
         var Emailverfy = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(this.state.email);
         if (this.state.email === '' || !Emailverfy) {
 
@@ -63,7 +63,14 @@ class
             }
             userLogin(data)
                 .then((res) => {
-                    console.log("responce true");
+                   // console.log("responce true",res);
+                    console.log(this.state.email);
+                    
+
+                   localStorage.setItem('Sender',this.state.email);
+                 // var sen= localStorage.getItem('Sender');
+                 // console.log("sender--->",sen);
+                  
                     this.props.props.history.push("/dashBoard");
 
                 }).catch((err) => {

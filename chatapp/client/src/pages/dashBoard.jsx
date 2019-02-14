@@ -7,35 +7,35 @@ import DashPage from '../components/dashboardpage';
 
 
 class DashBoard extends Component {
-handlelogout = event=>{
-    event.preventDefault();
-    this.props.history.push("/Login");
+    handlelogout = event => {
+        event.preventDefault();
+        this.props.history.push("/Login");
 
-}
+    }
 
-render(){
-    
-
-
-   return (
-<div>
-<AppBar > <h1 align="center"> WELCOME TO CHATAPP  </h1> <Button  className="grow"  color="inherit" onClick={this.handlelogout} >LOGOUT</Button></AppBar>
-
-<form>
-
-<DashPage  props={this.props} />
-
-</form>
+    render() {
 
 
 
-</div>
+        return (
+            <div>
+                <AppBar > <h1 align="center"> WELCOME TO CHATAPP  </h1> <Button className="grow" color="inherit" onClick={this.handlelogout} >LOGOUT</Button></AppBar>
+
+                
+
+                    <DashPage props={this.props} />
+
+                
 
 
 
-   ) 
+            </div>
 
-}
+
+
+        )
+
+    }
 
 }
 export default DashBoard;

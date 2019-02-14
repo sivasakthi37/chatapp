@@ -57,6 +57,10 @@ class Resetpage extends Component {
 
 
                 })
+                .catch((err)=>{
+                     alert("plz try again later");
+                    
+                })
         }
     }
     render() {

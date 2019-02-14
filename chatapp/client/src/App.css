@@ -50,7 +50,7 @@ dir {
 
 .container {
     /* margin-block-end: 100%; */
-    display: 1;
+    /* display: 1; */
     margin-top: -32%;
     margin-left: 60%;
     width: 100%;
@@ -60,7 +60,7 @@ dir {
 }
 
 .onlineflex {
-    display: flex;
+    /* display: flex; */
     margin-top: 10%;
     margin-left: 0%;
     margin-right: 60%;

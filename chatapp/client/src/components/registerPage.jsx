@@ -101,7 +101,8 @@ class RegisterPage extends Component {
             }
             userRegister(data)
                 .then((responce) => {
-                    console.log("hai how are u");
+
+                    console.log("hai how are u",responce);
                     this.props.props.history.push("/Login");
                 })
                 .catch((err) => {
