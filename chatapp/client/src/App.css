@@ -57,11 +57,12 @@ dir {
     border: 2px solid black;
     width: 500px;
     height: 400px;
+    overflow: auto;
 }
 
 .onlineflex {
     /* display: flex; */
-    margin-top: 10%;
+    margin-top: 1%;
     margin-left: 0%;
     margin-right: 60%;
     width: 100%;
@@ -112,6 +113,11 @@ margin-top: 6px;
 }
 #htag{
 
-margin-top:-1%;
+    margin-top:-1%;
+
+}
+#ag{
+    margin-top:9%;
+
 
 }

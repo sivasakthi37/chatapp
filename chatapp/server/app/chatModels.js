@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 const chatSchema = mongoose.Schema({
     sender: {
-        type: String, require: [true, "firstname require"]
+        type: String, require: [true, "sender require"]
     },
     reciver: {
-        type: String, require: [true, "lastname require"]
+        type: String, require: [true, "reciver require"]
     },
     message: {
-        type: String, require: [true, "email require"]
+        type: String, require: [true, "message require"]
     },
 
 })
-function chatmodel() {}
+function chatmodel() { }
 const chatuser = mongoose.model('chat', chatSchema);
 
 chatmodel.prototype.chatsave = (req, callback) => {
@@ -31,14 +31,27 @@ chatmodel.prototype.chatsave = (req, callback) => {
         }
         else {
 
-            callback(null,result);
+            callback(null, result);
         }
 
     })
 
 
 }
+chatmodel.prototype.getdata = (req, callback) => {
 
+    chatuser.find({}, (err, data) => {
+
+        if (err) {
+            console.log("error in chat models");
+            callback(err);
+        }
+        else {
+            console.log("chat mode get data sucessfully");
+            callback(null, data);
+        }
+    })
+}
 module.exports = new chatmodel();
 
 

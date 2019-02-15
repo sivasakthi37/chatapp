@@ -42,7 +42,7 @@ exports.checkuser = (data, callback) => {
 }
 exports.setpass = (data, callback) => {
     //console.log("services ",data.body);
-    
+
     userModel.updatepassword(data, (err, result) => {
 
         if (err) {
@@ -51,10 +51,31 @@ exports.setpass = (data, callback) => {
             callback(err);
 
         }
-        else{
+        else {
 
-            callback(null,result);
+            callback(null, result);
         }
 
     })
+}
+exports.getusers = (req, res) => {
+
+    userModel.getuser(req, (err, result) => {
+
+        if (err) {
+            console.log("service error");
+            res(err);
+
+        }
+        else {
+            console.log("service working");
+            res(null,result);
+
+
+        }
+
+
+    })
+
+
 }

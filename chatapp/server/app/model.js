@@ -21,7 +21,7 @@ const UserSchema = mongoose.Schema({
     {
         timestamps: true
     });
-function userModel() {}
+function userModel() { }
 var user = mongoose.model('user', UserSchema);
 function hash(password) {
     var hash = bcrypt.hashSync(password, saltRounds);
@@ -70,12 +70,12 @@ userModel.prototype.login = (body, callback) => {
         if (err) {
             callback(err);
         } else if (data != null) {
-         
-                    
+
+
             bcrypt.compare(body.password, data.password).then(function (res) {
                 if (res) {
-                   // console.log("responce in user model ",res);
-                  // console.log("data in model",data);
+                    // console.log("responce in user model ",res);
+                    // console.log("data in model",data);
                     console.log("login succesfully");
                     callback(null, res);
                 } else {
@@ -94,27 +94,27 @@ userModel.prototype.checkvalid = (body, callback) => {
 
     user.findOne({ "email": body.email }, (err, data) => {
 
-       // console.log("data:",data);
+        // console.log("data:",data);
         if (err) {
             console.log("error");
 
             callback(err);
         }
         else {
-            callback(null,data);
+            callback(null, data);
         }
     })
 
 }
 
-userModel.prototype.updatepassword=(res,callback)=>{
+userModel.prototype.updatepassword = (res, callback) => {
 
-    console.log("IN MODELS :",res.body.data);
-    console.log("IN MODEL DECODE :",res.decoded);
-    
+    console.log("IN MODELS :", res.body.data);
+    console.log("IN MODEL DECODE :", res.decoded);
 
- var password=hash(res.body.data);
-    user.updateOne({ _id: res.decoded.payload.user_id }, { password:password }, (err, result) => {
+
+    var password = hash(res.body.data);
+    user.updateOne({ _id: res.decoded.payload.user_id }, { password: password }, (err, result) => {
         if (err) {
             callback(err);
         }
@@ -123,6 +123,27 @@ userModel.prototype.updatepassword=(res,callback)=>{
         }
     });
 }
+userModel.prototype.getuser = (res, callback) => {
+  //  user.find({ "email": body.email }, (err, data) 
+    user.find({}, (err, result) => {
+        if (err) {
+            console.log("users details in database");
 
+            console.log("error in models");
+            callback(err);
+
+        }
+        else {
+            console.log("geting sucess in model");
+            callback(null, result)
+
+
+        }
+
+
+
+    })
+
+}
 module.exports = new userModel();
 //module.exports = mongoose.model('Register',RegisterSchema);

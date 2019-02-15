@@ -22,7 +22,7 @@ exports.login = (req, res) => {
     try {
         var responseResult = {};
         userService.login(req.body, (err, result) => {
-          //console.log(req.body.email);
+            //console.log(req.body.email);
 
             if (err) {
                 responseResult.success = false;
@@ -52,14 +52,14 @@ exports.finduser = (req, res) => {
             res.status(500).send(respondresult);
         }
         else {
-          //  console.log("result is true : " + result);
+            //  console.log("result is true : " + result);
             respondresult.success = true;
             respondresult.result = result;
 
             const payload = {
                 user_id: respondresult.result._id
             }
-          //  console.log(payload);
+            //  console.log(payload);
             const obj = gentoken.GenerateToken(payload);
             const url = `http://localhost:3000/reset/${obj.token}`;
 
@@ -71,21 +71,49 @@ exports.finduser = (req, res) => {
 }
 exports.setPassword = (req, res) => {
     var Responce = {};
-//console.log("controller  ",req.decoded);
-//console.log();
+    //console.log("controller  ",req.decoded);
+    //console.log();
 
     userService.setpass(req, (err, result) => {
 
 
         if (err) {
-            Responce .success = false;
-            Responce .result = err;
-            res.status(500).send( Responce );
+            Responce.success = false;
+            Responce.result = err;
+            res.status(500).send(Responce);
         }
         else {
-            Responce .success = true;
-            Responce .result = result;
-            res.status(200).send( Responce );
+            Responce.success = true;
+            Responce.result = result;
+            res.status(200).send(Responce);
         }
     })
+}
+exports.getuser = (req, res) => {
+    var responce = {}
+
+    userService.getusers(req, (err, data) => {
+
+        if (err) {
+
+            console.log("err in controller");
+            responce.sucess = false;
+            responce.result = err;
+            res.status(500).send(err);
+        }
+        else {
+            console.log(" controller working fine.. ");
+            responce.success = true;
+            responce.result = data;
+            res.status(200).send(data);
+
+        }
+
+
+    })
+
+
+
+
+
 }

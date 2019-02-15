@@ -1,6 +1,8 @@
 
 import openSocket from 'socket.io-client';
-//import Axios from 'axios';
+import axios from 'axios';
+
+
 const socket = openSocket('http://localhost:4000');
 export function sendchatmessage(data) {
 
@@ -11,14 +13,16 @@ export function sendchatmessage(data) {
     socket.on('emit', (result) => {
 
             console.log("message saved in data base ", result);
-
+    
+                 
     })
+    return true;
 }
-// export function chatuser(data){
+ export function chatmsg(){
 
-//     return axios(
+     return axios.get('/getallMessage');
 
-// }
+ }
 
 
 

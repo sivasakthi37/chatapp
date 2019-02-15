@@ -66,12 +66,16 @@ function passwordupdate(data, token) {
 
 
 }
+function getallusers(){
+
+return axios.get('/getallusers');
 
 
-
+}
 export {
     userRegister,
     userLogin,
     verifyEmail,
     passwordupdate,
+    getallusers,
 }
