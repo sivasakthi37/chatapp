@@ -48,10 +48,11 @@ io.sockets.on('connection', (client) => {
 
             }
             else {
-                client.emit('emit', res);
+                // client.emit('emit', res);
 
             }
-
+            io.emit(req.reciver,req);
+            io.emit(req.sender,req);
 
         })
     });

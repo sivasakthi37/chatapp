@@ -2,17 +2,19 @@ import React, { Component } from "react";
 //import TextField from '@material-ui/core/TextField';
 import { TextField, MenuItem } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import { sendchatmessage } from '../services/chatServices';
-//import openSocket from 'socket.io-client';
+//import { sendchatmessage } from '../services/chatServices';
+import openSocket from 'socket.io-client';
+
 import { getallusers } from '../services/userServices';
 import { chatmsg } from '../services/chatServices';
 import '../App.css';
 //import { AppBar } from "@material-ui/core";
 import AppBar from '@material-ui/core/AppBar/AppBar';
+const socket = openSocket('http://localhost:4000');
 class DashPage extends Component {
 
     constructor(props) {
-        // const socket = openSocket('http://localhost:4000');
+        //  const socket = openSocket('http://localhost:4000');
         super(props);
         this.state = {
             onlineuser: [],
@@ -21,45 +23,18 @@ class DashPage extends Component {
             message: '',
             chatmsg: [],
             display: '',
+            msg: [],
 
         }
         // socket.emit('message', "test data");
     }
-    componentDidMount() {
-
-        getallusers()
-            .then((res) => {
-
-                console.log(" responce in dashboard ", res.data);
-                this.setState({ onlineuser: res.data })
-                //this.setState({ recever: Receiver });
-
-            })
-            .catch(() => {
-
-                console.log("error in getting data ");
-
-
-            })
-
-    }
-
     componentWillMount() {
+        const Sen = localStorage.getItem('Sender')
 
+        console.log("Sender -->", Sen);
 
-        chatmsg()
-            .then((res) => {
-                console.log("messages in dtaa base in dash bord", res.data.result);
-                this.setState({ chatmsg: res.data.result });
-
-            }).catch(() => {
-
-
-                console.log(("data base not give any data"));
-
-
-            });
-
+        this.setState({ sender: Sen });
+        console.log("sender======> ", this.state.sender);
 
 
     }
@@ -75,15 +50,13 @@ class DashPage extends Component {
         let Receiver = event.target.textContent;
         console.log("recevier in dash board ", Receiver);
         this.setState({ recever: Receiver });
+        console.log("sender", this.state.sender);
 
     };
     handlesend = event => {
         event.preventDefault();
-        const Sen = localStorage.getItem('Sender')
 
-        console.log("Sender -->", Sen);
-        console.log("sender ", this.state.sender);
-        this.setState({ sender: Sen });
+        const Sen = localStorage.getItem('Sender')
 
         var data = {
             sender: Sen,
@@ -92,16 +65,57 @@ class DashPage extends Component {
 
         }
         console.log("data in dash board", data);
-        var check = sendchatmessage(data);
-        if (check) {
-            console.log("ckeck in dash board ", check);
 
-        }
+        // sendchatmessage(data);
+        socket.emit('message', data);
+        this.setState({ message: '' })
 
-        this.setState({ message: '' });
-        //  this.setState({display:this.state.message});
 
     }
+    //var  msgdisplay = document.getElementById("msgdisplay");
+
+    componentDidMount() {
+
+        chatmsg()
+            .then((res) => {
+                console.log("messages in dtaa base in dash bord", res.data.result);
+                this.setState({ chatmsg: res.data.result });
+
+            }).catch(() => {
+                console.log(("data base not give any data"));
+            });
+
+
+
+        getallusers()
+            .then((res) => {
+
+                console.log(" responce in dashboard ", res.data);
+                this.setState({ onlineuser: res.data })
+                //this.setState({ recever: Receiver });
+
+            })
+            .catch(() => {
+
+                console.log("error in getting data ");
+
+
+            })
+        const Sen = localStorage.getItem('Sender')
+
+        socket.on(Sen, (result) => {
+
+            console.log("message saved in data base ", result);
+            // msgdisplay.innerHTML += '<p><strong>' + result.sender + ':</strong>' + result.message + '</p>';
+            var msg = this.state.msg;
+            msg.push(result);
+            this.setState({ msg: msg });
+            console.log("this set msg====>", this.state.msg);
+        })
+    }
+    //  this.setState({display:this.state.message});
+
+
     handlelogout = event => {
         event.preventDefault();
         this.props.props.history.push("/Login");
@@ -109,37 +123,56 @@ class DashPage extends Component {
     }
     render() {
 
+        console.log("sender ", this.state.sender);
 
 
         const msg = this.state.chatmsg.map((key) => {
-
-
 
             return (
 
                 <div >
                     {key.sender === localStorage.getItem('Sender') ? (
-                    
+
+                        key.sender === this.state.recever ?
+                            (
+                                <div>
+                                    {/* <label>{key.sender}:</label>
+                            <div>{key.message}</div> */}
+
+                                    <MenuItem >{key.sender}:{key.message}</MenuItem>
+                                </div>) : (null)
+                    ) : (null)}
+                    {key.sender === this.state.recever ? (
                         <div>
-                            <label>{key.sender}:</label>
-                            <div>{key.message}</div>
-                        </div>) : (null)
-                
+                               <MenuItem >{key.sender}:{key.message}</MenuItem>
+                            {/* <label> {key.sender}  </label>
+                            <div>{key.message} </div> */}
+                        </div>
+                    ) : (null)
                     }
                 </div>
             )
 
         })
+        const dis = this.state.msg.map((key) => {
+            return (
 
+                <div>
+                    <MenuItem >{key.sender}:{key.message}</MenuItem>
 
+                </div>
 
+            )
+        });
 
         const users = this.state.onlineuser.map((key) => {
 
             if (key.email !== localStorage.getItem('Sender')) {
+
                 return (
                     <div overflow="auto">
-                        <MenuItem onClick={this.handleClick1}>{key.email}</MenuItem>
+                        <MenuItem onClick={this.handleClick1} >{key.email}
+                        </MenuItem>
                     </div>
                 )
             }
@@ -169,11 +202,9 @@ class DashPage extends Component {
                     <AppBar > <h1 align="center"> WELCOME TO CHATAPP  </h1> <Button className="grow" color="inherit" onClick={this.handlelogout} >LOGOUT</Button>
 
                     </AppBar>
-                    <h1 id="ag">user:{localStorage.getItem('Sender')} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To:{this.state.recever} </h1>
+                    <h1 id="ag">user:{this.state.sender} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To:{this.state.recever} </h1>
 
                 </div>
-
-
 
                 <div>
                     <div className="onlineflex">
@@ -181,13 +212,15 @@ class DashPage extends Component {
 
                         {users}
                     </div>
-                    <div className="container">
+                    <div className="container"> 
                         {msg}
+
+                        {dis}
                     </div>
                 </div>
                 <div className="containerButton">
                     < TextField margin="normal" fullWidth label="type your text here"
-
+                        value={this.state.message}
                         onChange={this.handleClick('message')}
                     />
                     <Button id="sendMessage" variant="contained" color="primary" className="button" onClick={this.handlesend} >Send</Button>
