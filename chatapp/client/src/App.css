@@ -36,7 +36,7 @@ form {
     margin-top: 7%;
 }
 
-.margin {
+#margin {
     margin-top: 1%;
 }
 
@@ -52,11 +52,11 @@ dir {
     /* margin-block-end: 100%; */
     /* display: 1; */
     margin-top: -32%;
-    margin-left: 60%;
+    margin-left: 29%;
     width: 100%;
     border: 2px solid black;
-    width: 500px;
-    height: 400px;
+    width:  894px;
+    height: 423px;
     overflow: auto;
 }
 
@@ -121,3 +121,19 @@ margin-top: 6px;
 
 
 }
+#sender-div{
+    margin-left: 572px;
+    background-color: #ecbfd4;
+    border-radius: 20px;
+    overflow: auto;
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 8px
+  }
+  #receiver-div{
+    background-color: #e9db8c;
+    border-radius: 20px;
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 8px
+  }

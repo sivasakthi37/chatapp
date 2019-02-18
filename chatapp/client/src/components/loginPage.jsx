@@ -7,6 +7,7 @@ import CloseIcon from '@material-ui/icons/Close';
 // import { ToastContainer, toast } from "react-toastify";
 // import 'react-toastify/dist/ReactToastify'
 import Snackbar from '@material-ui/core/Snackbar';
+import Input from '../components/input'
 //import reg from './register';
 import { userLogin } from '../services/userServices'
 class
@@ -19,6 +20,8 @@ class
             password: '',
             open: false,
         }
+
+
     }
 
     handleforgetpassword = event => {
@@ -33,9 +36,6 @@ class
 
         this.setState({ open: false });
     };
-    handleChange = name => event => {
-        this.setState({ [name]: event.target.value });
-    };
 
     handleReg = event => {
         event.preventDefault();
@@ -44,10 +44,14 @@ class
     }
     handleSubmit = event => {
         event.preventDefault();
-       // console.log(this.state.username);
-      //  console.log(this.state.username === '');
-      //  console.log("hai how are u");
+        // console.log(this.state.username);
+        //  console.log(this.state.username === '');
+        //  console.log("hai how are u");
+        console.log("msg in login page======>,", this.state.email);
+        console.log("password in  login===>", this.state.password);
         var Emailverfy = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(this.state.email);
+        console.log("this.state.email === ''", this.state.email === '');
+
         if (this.state.email === '' || !Emailverfy) {
 
             this.setState({ open: true });
@@ -63,14 +67,11 @@ class
             }
             userLogin(data)
                 .then((res) => {
-                   // console.log("responce true",res);
+                    // console.log("responce true",res);
                     console.log(this.state.email);
-                    
-
-                   localStorage.setItem('Sender',this.state.email);
-                 // var sen= localStorage.getItem('Sender');
-                 // console.log("sender--->",sen);
-                  
+                    localStorage.setItem('Sender', this.state.email);
+                    // var sen= localStorage.getItem('Sender');
+                    // console.log("sender--->",sen);
                     this.props.props.history.push("/dashBoard");
 
                 }).catch((err) => {
@@ -80,27 +81,55 @@ class
                 })
             //window.location.href='/dashboard';
             //  this.props.history.push("/dashBoard");
-
         }
     }
 
+    handleChange = name => {
+        console.log("hai name in login " + name);
+
+        this.setState({ [name]: name });
+    };
+
+    handleChange1 = name => event => {
+        console.log("hai name in login " + name);
+
+        this.setState({ [name]: event.target.value });
+    };
+
+
+
+
+
     render() {
+        // console.log("msg in login page======>,",this.state.email);
+        // console.log("password in  login===>",this.state.password);
+
+
         return (
             <div>
                 <div >
                     <form align="center">
                         <div>
+
+                            {/* <Input handleChange={this.handleChange} type={"text"} label={"Email"} />
+                             <Input handleChange={this.handleChange} type={"password"} label={"Password"} /> */}
+
                             < TextField label="Email"
-                                onChange={this.handleChange('email')}
+                                onChange={this.handleChange1('email')}
                             />
                         </div>
                         <div>
+
+                            {/* <Inputpassword handlepassword={this.handleChange} /> */} 
                             <TextField className="margin" label="password" type="password"
-                                onChange={this.handleChange('password')}
+                                onChange={this.handleChange1('password')}
                             />
                         </div>
 
 
+                        <div>
+                            {/* <Loginbutton /> */}
+                        </div>
 
                         <div id="buttonalign" >
                             <Button variant="contained" color="primary" className="button" onClick={this.handleSubmit} > SUBMIT</Button>

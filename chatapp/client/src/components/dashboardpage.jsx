@@ -17,7 +17,7 @@ class DashPage extends Component {
         //  const socket = openSocket('http://localhost:4000');
         super(props);
         this.state = {
-            onlineuser: [],
+            onlineuser:[],
             sender: '',
             recever: '',
             message: '',
@@ -27,6 +27,7 @@ class DashPage extends Component {
 
         }
         // socket.emit('message', "test data");
+
     }
     componentWillMount() {
         const Sen = localStorage.getItem('Sender')
@@ -85,8 +86,6 @@ class DashPage extends Component {
                 console.log(("data base not give any data"));
             });
 
-
-
         getallusers()
             .then((res) => {
 
@@ -128,6 +127,11 @@ class DashPage extends Component {
 
         const msg = this.state.chatmsg.map((key) => {
 
+            console.log("key.sender === localStorage.getItem('Sender')", key.sender === localStorage.getItem('Sender'));
+            console.log("key.sender === this.state.recever", key.sender === this.state.recever);
+
+
+
             return (
 
                 <div >
@@ -135,16 +139,16 @@ class DashPage extends Component {
 
                         key.sender === this.state.recever ?
                             (
-                                <div>
+                                <div id="receiver-div">
                                     {/* <label>{key.sender}:</label>
                             <div>{key.message}</div> */}
 
-                                    <MenuItem >{key.sender}:{key.message}</MenuItem>
+                                    <label><b>{key.sender}</b></label> :<div>{key.message}</div>
                                 </div>) : (null)
                     ) : (null)}
                     {key.sender === this.state.recever ? (
-                        <div>
-                               <MenuItem >{key.sender}:{key.message}</MenuItem>
+                        <div id="sender-div">
+                           <label><b>{key.sender}</b></label> :<div>{key.message}</div>
                             {/* <label> {key.sender}  </label>
                             <div>{key.message} </div> */}
                         </div>
@@ -154,14 +158,21 @@ class DashPage extends Component {
             )
 
         })
+
+
         const dis = this.state.msg.map((key) => {
+            // console.log("key.sender == this.state.sender");
+            // console.log(key.sender + " ===" + this.state.sender);
+
+            // console.log(key.sender === this.state.sender);
+
             return (
-
                 <div>
-                    <MenuItem >{key.sender}:{key.message}</MenuItem>
-
+                    {key.sender === this.state.sender ?
+                        (<div id="sender-div"> <label><b>{key.sender}</b></label>:<div>{key.message} </div>
+                        </div>)
+                        : (<div id="receiver-div"><label><b>{key.sender}</b></label>:<div>{key.message}</div></div>)}
                 </div>
-
             )
         });
 
@@ -212,8 +223,8 @@ class DashPage extends Component {
 
                         {users}
                     </div>
-                    <div className="container"> 
-                        {msg}
+                    <div className="container">
+                         {msg}  
 
                         {dis}
                     </div>

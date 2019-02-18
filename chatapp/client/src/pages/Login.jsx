@@ -13,21 +13,15 @@ import Loginpage from '../components/loginPage';
 
 
 class Login extends Component {
-
     render() {
         return (
             <div>
-
                 <div>
                      <AppBar position="fixed" > <h1 className="center" >.......LOGIN PAGES.......</h1> </AppBar> 
-
-                </div>
-                
-                
+                </div>      
                     <div>
                         <Loginpage props={this.props} />
                     </div>
-
             </div>
         );
     }

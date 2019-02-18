@@ -19,10 +19,6 @@ class DashBoard extends Component {
             <div>
                 <DashPage props={this.props} />
 
-
-
-
-
             </div>
 
 
