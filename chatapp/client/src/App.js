@@ -10,7 +10,6 @@ import Reg from './pages/register';
 // import io from 'socket.io-client';
 // const socket = io.connect('http://localhost:4000');
 
-
 class App extends Component {
   render() {
     return (
